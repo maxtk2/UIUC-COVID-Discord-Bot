@@ -2,6 +2,18 @@ module.exports = {
     name: 'data',
     description: "This reports UIUC covid data as an embed",
     execute(message, args, Discord) {
+        /*const puppeteer = require('puppeteer');
+        const browser = await puppeteer.launch({
+            headless: false,
+        });
+        const page = await browser.newPage();
+        await page.setRequestInterception(true);
+
+        await page.click('a');
+        await page.waitForNavigation();
+
+        await page.goto('https://covid19.illinois.edu/on-campus-covid-19-testing-data-dashboard/');
+        await page.click('button');*/
         const currentCases = 100;
         const positivityRate = '0.5%';
         const totalTests = 1000000;
@@ -11,7 +23,7 @@ module.exports = {
         .setTitle('Covid Data')
         .setURL('https://covid19.illinois.edu/on-campus-covid-19-testing-data-dashboard/')
         .addFields(
-            {name: 'Most recent case data (' + mostRecentDataDay + ')', value: currentCases},
+            {name: 'Most recent daily cases (' + mostRecentDataDay + ')', value: currentCases},
             {name: '7-day positivity rate', value: positivityRate},
             {name: 'Total tests', value: totalTests}
         )
