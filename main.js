@@ -32,4 +32,4 @@ client.on('message', message => {
     }
 })
 
-client.login('Nzk1NzEwNDU2Mjk1MTk0NjQ0.X_NVHA._Y9Ol0gMy71RMnOkqFbBxLYPNGo');
+client.login('placeholder');
