@@ -4,13 +4,13 @@ import discord
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from datetime import datetime
+import config
 
 now = datetime.now() # current date and time
 today_date = now.strftime("%m/%d/%Y")
 
 session = webdriver.Chrome()
-prefix = '-' # Used to call commands on the bot
-bot = commands.Bot(command_prefix=prefix)
+bot = commands.Bot(command_prefix=config.prefix)
 
 positivityRate = 'DEFAULT_RATE'
 totalTests = 0
@@ -62,4 +62,4 @@ async def data(ctx):
     embed.set_footer(text='Make sure to wear your mask and practice social distancing!')
     await ctx.send(embed=embed)
 
-bot.run('INPUT_KEY_HERE') # Token for the bot that would allow me to login. Kept private for security
+bot.run(config.token)

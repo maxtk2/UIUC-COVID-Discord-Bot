@@ -1,3 +1,6 @@
 JavaScript (legacy version)/node_modules/
-/.idea/
-/ghostdriver.log
+.idea/
+.venv/
+*.log
+*.pyc
+config.py
