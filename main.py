@@ -62,4 +62,4 @@ async def data(ctx):
     embed.set_footer(text='Make sure to wear your mask and practice social distancing!')
     await ctx.send(embed=embed)
 
-bot.run(config.token)
+bot.run(config.token) # Token for the bot that would allow me to login. Kept private for security
