@@ -1,34 +1,16 @@
-import time
 from discord.ext import commands
 import discord
-from bs4 import BeautifulSoup
-from selenium import webdriver
 from datetime import datetime
 import config
+from data_scraper import DataScraper
 
 now = datetime.now() # current date and time
 today_date = now.strftime("%m/%d/%Y")
 
-session = webdriver.Chrome()
 bot = commands.Bot(command_prefix=config.prefix)
 
-positivityRate = 'DEFAULT_RATE'
-totalTests = 0
-
-browser = webdriver.Chrome()
-home_page = browser.get('https://covid19.illinois.edu/on-campus-covid-19-testing-data-dashboard/')
-home_html = browser.page_source
-homeSoup = BeautifulSoup(home_html, 'lxml')
-link = homeSoup.find('a', href=True, text='View the Testing Data Dashboard here')
-url = link.get('href')
-data_page = browser.get(url)
-time.sleep(4) # This is bad, but was the only way I could get the page to load before scraping.
-data_html = browser.page_source
-dataSoup = BeautifulSoup(data_html, 'lxml')
-data_divs = dataSoup.find_all('text', {"class": "single-result"})
-totalTests = data_divs[0].text
-positivityRate = data_divs[1].text
-
+data_scraper = DataScraper()
+data_scraper.scrape()
 
 @bot.event
 async def on_ready():
@@ -57,8 +39,8 @@ async def data(ctx):
                           url="https://covid19.illinois.edu/on-campus-covid-19-testing-data-dashboard/")
     embed.set_thumbnail(
         url="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Illinois_Fighting_Illini_logo.svg/800px-Illinois_Fighting_Illini_logo.svg.png")
-    embed.add_field(name='7-day positivity rate', value=positivityRate)
-    embed.add_field(name='Total tests', value=str(totalTests))
+    embed.add_field(name='7-day positivity rate', value=data_scraper.positivity_rate)
+    embed.add_field(name='Total tests', value=str(data_scraper.total_tests))
     embed.set_footer(text='Make sure to wear your mask and practice social distancing!')
     await ctx.send(embed=embed)
 
