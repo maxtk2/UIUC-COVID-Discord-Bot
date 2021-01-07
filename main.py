@@ -48,7 +48,7 @@ async def data(ctx):
 @tasks.loop(seconds=30)
 async def scrape():
     print("Starting scrape")
-    data_scraper.scrape()
+    await data_scraper.scrape()
     print("Done scraping")
 
 
