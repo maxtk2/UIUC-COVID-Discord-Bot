@@ -1,4 +1,4 @@
-from discord.ext import commands
+from discord.ext import commands, tasks
 import discord
 from datetime import datetime
 import config
@@ -10,11 +10,11 @@ today_date = now.strftime("%m/%d/%Y")
 bot = commands.Bot(command_prefix=config.prefix)
 
 data_scraper = DataScraper()
-data_scraper.scrape()
 
 @bot.event
 async def on_ready():
     print('UIUC COVID DATA BOT IS ONLINE')
+    scrape.start()
 
 
 @bot.command(name='ping')
@@ -40,8 +40,16 @@ async def data(ctx):
     embed.set_thumbnail(
         url="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Illinois_Fighting_Illini_logo.svg/800px-Illinois_Fighting_Illini_logo.svg.png")
     embed.add_field(name='7-day positivity rate', value=data_scraper.positivity_rate)
-    embed.add_field(name='Total tests', value=str(data_scraper.total_tests))
+    embed.add_field(name='Total tests', value=data_scraper.total_tests)
     embed.set_footer(text='Make sure to wear your mask and practice social distancing!')
     await ctx.send(embed=embed)
+
+
+@tasks.loop(seconds=30)
+async def scrape():
+    print("Starting scrape")
+    data_scraper.scrape()
+    print("Done scraping")
+
 
 bot.run(config.token) # Token for the bot that would allow me to login. Kept private for security
