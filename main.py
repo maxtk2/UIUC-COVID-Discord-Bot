@@ -39,8 +39,8 @@ async def data(ctx):
                           url="https://covid19.illinois.edu/on-campus-covid-19-testing-data-dashboard/")
     embed.set_thumbnail(
         url="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Illinois_Fighting_Illini_logo.svg/800px-Illinois_Fighting_Illini_logo.svg.png")
-    embed.add_field(name='7-day positivity rate', value=data_scraper.positivity_rate)
-    embed.add_field(name='Total tests', value=data_scraper.total_tests)
+    embed.add_field(name='7-day positivity rate', value='{:0.2f}%'.format(data_scraper.positivity_rate * 100))
+    embed.add_field(name='Total tests', value='{:,}'.format(data_scraper.total_tests))
     embed.set_footer(text='Make sure to wear your mask and practice social distancing!')
     await ctx.send(embed=embed)
 
