@@ -18,6 +18,7 @@ Contact me if you want this bot in your server! My email is maxtk2@illinois.edu.
 - discord</k>.py 1.6.0
 - playwright 0.171.1
 - pandas 1.2.0
+- Chromium by `python -m playwright install`
 
 ### Setting Up
 1. [Create a Discord bot and invite it to your server.](https://discordpy.readthedocs.io/en/latest/discord.html)
