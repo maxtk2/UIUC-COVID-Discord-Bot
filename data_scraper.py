@@ -2,6 +2,7 @@ import asyncio
 from playwright import async_playwright
 import pandas as pd
 
+
 class DataScraper:
 
     async def scrape(self):
@@ -29,6 +30,8 @@ class DataScraper:
             await context.close()
             await browser.close()
 
-            df = pd.concat([cases_df[["_time", "New Cases"]], tests_df["Total Daily Tests Results"]], axis=1)
-            self.positivity_rate = df["New Cases"].tail(7).sum() / df["Total Daily Tests Results"].tail(7).sum()
+            self.df = pd.concat(
+                [cases_df[["_time", "New Cases"]], tests_df["Total Daily Tests Results"]], axis=1)
+            self.positivity_rate = df["New Cases"].tail(
+                7).sum() / df["Total Daily Tests Results"].tail(7).sum()
             self.total_tests = df["Total Daily Tests Results"].sum()

@@ -4,12 +4,13 @@ from datetime import datetime
 import config
 from data_scraper import DataScraper
 
-now = datetime.now() # current date and time
+now = datetime.now()  # current date and time
 today_date = now.strftime("%m/%d/%Y")
 
 bot = commands.Bot(command_prefix=config.prefix)
 
 data_scraper = DataScraper()
+
 
 @bot.event
 async def on_ready():
@@ -39,9 +40,12 @@ async def data(ctx):
                           url="https://covid19.illinois.edu/on-campus-covid-19-testing-data-dashboard/")
     embed.set_thumbnail(
         url="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Illinois_Fighting_Illini_logo.svg/800px-Illinois_Fighting_Illini_logo.svg.png")
-    embed.add_field(name='7-day positivity rate', value='{:0.2f}%'.format(data_scraper.positivity_rate * 100))
-    embed.add_field(name='Total tests', value='{:,}'.format(data_scraper.total_tests))
-    embed.set_footer(text='Make sure to wear your mask and practice social distancing!')
+    embed.add_field(name='7-day positivity rate',
+                    value='{:0.2f}%'.format(data_scraper.positivity_rate * 100))
+    embed.add_field(name='Total tests', value='{:,}'.format(
+        data_scraper.total_tests))
+    embed.set_footer(
+        text='Make sure to wear your mask and practice social distancing!')
     await ctx.send(embed=embed)
 
 
@@ -52,4 +56,5 @@ async def scrape():
     print("Done scraping")
 
 
-bot.run(config.token) # Token for the bot that would allow me to login. Kept private for security
+# Token for the bot that would allow me to login. Kept private for security
+bot.run(config.token)
