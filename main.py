@@ -5,7 +5,9 @@ import matplotlib
 from datetime import datetime
 import config
 from data_scraper import DataScraper
+from pathlib import Path
 
+Path("images").mkdir(parents=True, exist_ok=True)
 
 bot = commands.Bot(command_prefix=config.prefix)
 
