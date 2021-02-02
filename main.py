@@ -62,10 +62,10 @@ async def graph(ctx):
                   data_scraper.df["Total Daily Tests Results"], '-')
     plt.xlabel('Date')
     plt.ylabel('Daily Positivity %')
-    plt.savefig('graph.png', transparent=True)
+    plt.savefig('images/graph.png', transparent=True)
     plt.close()
 
-    await ctx.send(file=discord.File('graph.png'))
+    await ctx.send(file=discord.File('images/graph.png'))
 
 # Should loop once a day
 

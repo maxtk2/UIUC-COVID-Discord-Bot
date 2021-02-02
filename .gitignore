@@ -3,4 +3,4 @@
 *.log
 *.pyc
 config.py
-graph.png
+images/
