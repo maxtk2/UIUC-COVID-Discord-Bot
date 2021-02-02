@@ -3,13 +3,18 @@
 
 This is a Discord bot that periodically retrieves data from the [UIUC On-Campus COVID-19 Testing Data Dashboard](https://go.illinois.edu/COVIDTestingData). The user can see this data through summaries and graphs through various commands. An explanation of the data retrieved can be found on [this webpage](https://covid19.illinois.edu/on-campus-covid-19-testing-data-dashboard/).
 
-![example](https://github.com/maxtk2/UIUC-COVID-Discord-Bot/blob/main/Example%20Images/Basic%20functionality.JPG?raw=true)
+
 
 Contact me if you want this bot in your server! My email is maxtk2@illinois.edu.
 
 ## Commands
 - -ping: Prints the ping of the bot.
 - -data: Prints an embed containing a summary of COVID data.
+- -graph: Displays a graph of case positivity % over time.
+
+## Examples
+![data](https://github.com/maxtk2/UIUC-COVID-Discord-Bot/blob/main/Example%20Images/data.png?raw=true)
+![graph](https://github.com/maxtk2/UIUC-COVID-Discord-Bot/blob/main/Example%20Images/graph.png?raw=true)
 
 ## Getting Started
 
@@ -18,6 +23,7 @@ Contact me if you want this bot in your server! My email is maxtk2@illinois.edu.
 - discord</k>.py 1.6.0
 - playwright 0.171.1
 - pandas 1.2.0
+- matplotlib 3.3.4
 - Chromium by `python -m playwright install`
 
 ### Setting Up
