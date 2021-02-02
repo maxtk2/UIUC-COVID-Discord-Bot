@@ -1,11 +1,11 @@
 from discord.ext import commands, tasks
 import discord
+import matplotlib.pyplot as plt
+import matplotlib
 from datetime import datetime
 import config
 from data_scraper import DataScraper
 
-now = datetime.now()  # current date and time
-today_date = now.strftime("%m/%d/%Y")
 
 bot = commands.Bot(command_prefix=config.prefix)
 
@@ -34,6 +34,7 @@ async def data(ctx):
     Prints current covid data for UIUC.
     '''
 
+    today_date = datetime.now().strftime("%m/%d/%Y")
     embed = discord.Embed(title='Covid Data for ' + today_date,
                           description='',
                           color=0xff9705,
@@ -47,6 +48,26 @@ async def data(ctx):
     embed.set_footer(
         text='Make sure to wear your mask and practice social distancing!')
     await ctx.send(embed=embed)
+
+
+@bot.command(name='graph')
+async def graph(ctx):
+    '''
+    Displays a graph of case positivity % over time.
+    '''
+
+    plt.style.use('dark_background')
+    dates = matplotlib.dates.date2num(data_scraper.df['_time'])
+    plt.plot_date(dates, 100 * data_scraper.df["New Cases"] /
+                  data_scraper.df["Total Daily Tests Results"], '-')
+    plt.xlabel('Date')
+    plt.ylabel('Daily Positivity %')
+    plt.savefig('graph.png', transparent=True)
+    plt.close()
+
+    await ctx.send(file=discord.File('graph.png'))
+
+# Should loop once a day
 
 
 @tasks.loop(seconds=30)
